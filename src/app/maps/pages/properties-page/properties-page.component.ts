@@ -4,12 +4,14 @@ interface House {
   title: string;
   description: string;
   lngLat: [number, number];
-}
+};
 
 @Component({
   templateUrl: './properties-page.component.html',
   styleUrls: ['./properties-page.component.css']
 })
+
+
 export class PropertiesPageComponent {
 
   public houses: House[] = [
@@ -33,6 +35,6 @@ export class PropertiesPageComponent {
       description: 'Local comercial disponible en Madrid, España, cerca de El Jardín Secreto.',
       lngLat: [ -3.7112735618380177, 40.42567285425766 ]
     },
-  ]
+  ];
 
-}
+};

@@ -5,31 +5,31 @@ import { LngLat, Map, Marker } from 'mapbox-gl';
 interface MarkerAndColor {
   color: string;
   marker: Marker;
-}
+};
 
 interface PlainMarker {
   color: string;
   lngLat: number[];
+};
 
-}
 
 @Component({
   templateUrl: './markers-page.component.html',
   styleUrls: ['./markers-page.component.css']
 })
+
+
 export class MarkersPageComponent {
 
-
-  @ViewChild('map') divMap?: ElementRef
+  @ViewChild('map') divMap?: ElementRef;
 
   public markers: MarkerAndColor[] = [];
-
   public zoom: number = 13;
   public map?: Map;
-  public currentLngLat: LngLat = new LngLat(-74.5, 40)
+  public currentLngLat: LngLat = new LngLat(-74.5, 40);
+
   
   ngAfterViewInit(): void {
-
     if( !this.divMap ) throw 'El elemento HTML no fue encontrado';
 
     this.map = new Map({
@@ -40,29 +40,17 @@ export class MarkersPageComponent {
       });
 
       this.readFromLocalStorage();
-
-    // const markerHtml = document.createElement('div')
-    // markerHtml.innerHTML = 'David'
-
-    // const marker = new Marker({
-    //   //color:'red'
-    //   element:markerHtml
-    // })
-    //   .setLngLat(this.currentLngLat)
-    //   .addTo(this.map)
-
-  }
+  };
 
 
   createMarker() {
-
     if(!this.map) return  //Si no existe el mapa, no hacer nada
 
     const color= '#xxxxxx'.replace(/x/g, y=>(Math.random()*16|0).toString(16));
     const lngLat = this.map.getCenter()
 
     this.addMarker(lngLat, color)
-  }
+  };
 
 
   addMarker( lngLat:LngLat, color:string ) {
@@ -85,19 +73,22 @@ export class MarkersPageComponent {
       this.saveToLocalStorage()
     });
 
-  }
+  };
+
 
   deleteMarker( index: number) {
     this.markers[index].marker.remove();
     this.markers.splice(index,1);
-  }
+  };
+
 
   flyTo( marker: Marker) {
     this.map?.flyTo({
       zoom:14,
       center: marker.getLngLat()
-    })
-  }
+    });
+  };
+
 
   saveToLocalStorage() {
     const plainMarkers: PlainMarker[] = this.markers.map( ({ color, marker }) => {
@@ -108,8 +99,8 @@ export class MarkersPageComponent {
     });
 
     localStorage.setItem('plainMarkers', JSON.stringify( plainMarkers ));
+  };
 
-  }
 
   readFromLocalStorage() {
     const plainMarkersString = localStorage.getItem('plainMarkers') ?? '[]';
@@ -121,8 +112,6 @@ export class MarkersPageComponent {
 
       this.addMarker( coords, color);
     });
-  }
-
-
+  };
 
 }

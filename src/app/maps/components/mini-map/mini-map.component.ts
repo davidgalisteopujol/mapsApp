@@ -6,10 +6,12 @@ import {Map, Marker} from 'mapbox-gl';
   templateUrl: './mini-map.component.html',
   styleUrls: ['./mini-map.component.css']
 })
+
+
 export class MiniMapComponent {
 
   @Input() lngLat?: [number, number];
-  @ViewChild('map') divMap?: ElementRef
+  @ViewChild('map') divMap?: ElementRef;
 
   ngAfterViewInit(): void {
     if(!this.divMap?.nativeElement) throw "Map Div Not Found";
@@ -27,5 +29,5 @@ export class MiniMapComponent {
         .setLngLat( this.lngLat)
         .addTo( map )
     
-  }
-}
+  };
+};

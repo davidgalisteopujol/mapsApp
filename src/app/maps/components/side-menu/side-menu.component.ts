@@ -10,6 +10,8 @@ interface MenuItem {
   templateUrl: './side-menu.component.html',
   styleUrls: ['./side-menu.component.css']
 })
+
+
 export class SideMenuComponent {
 
   public menuItems:MenuItem[] = [
@@ -17,6 +19,6 @@ export class SideMenuComponent {
     {route:'/maps/zoom-range', name: 'ZoomRange'},
     {route:'/maps/markers', name: 'Markers'},
     {route:'/maps/properties', name: 'Houses'},
-  ] 
+  ]; 
 
-}
+};

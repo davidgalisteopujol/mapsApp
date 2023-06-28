@@ -5,6 +5,8 @@ import {LngLat, Map} from 'mapbox-gl';
   templateUrl: './zoom-range-page.component.html',
   styleUrls: ['./zoom-range-page.component.css']
 })
+
+
 export class ZoomRangePageComponent implements AfterViewInit, OnDestroy{
   
 
@@ -12,10 +14,10 @@ export class ZoomRangePageComponent implements AfterViewInit, OnDestroy{
 
   public zoom: number = 10;
   public map?: Map;
-  public currentLngLat: LngLat = new LngLat(-74.5, 40)
+  public currentLngLat: LngLat = new LngLat(-74.5, 40);
+
   
   ngAfterViewInit(): void {
-
     if( !this.divMap ) throw 'El elemento HTML no fue encontrado';
 
     this.map = new Map({
@@ -26,13 +28,15 @@ export class ZoomRangePageComponent implements AfterViewInit, OnDestroy{
       });
 
     this.mapListeners()
-  }
+  };
+
 
   ngOnDestroy(): void {
     this.map?.off('move', () => {
       this.map?.remove();
     })
-  }
+  };
+
 
   mapListeners() {
     if( !this.map ) throw 'Mapa no inicializado';
@@ -48,24 +52,24 @@ export class ZoomRangePageComponent implements AfterViewInit, OnDestroy{
 
     this.map.on('move', () => {
       this.currentLngLat = this.map!.getCenter();
-      
     });
 
-  }
+  };
 
 
   zoomIn() {
     this.map?.zoomIn();
-  }
+  };
+
 
   zoomOut() {
     this.map?.zoomOut();
-  }
+  };
+  
 
   zoomChanged( value: string) {
     this.zoom = Number(value);
-    this.map?.zoomTo( this.zoom )
-  }
+    this.map?.zoomTo( this.zoom );
+  };
 
-
-}
+};
